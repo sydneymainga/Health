@@ -50,12 +50,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(password)) {
 
-                    Toast.makeText(LoginActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please enter your password", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (password.length() > 6) {
+                if (password.length() < 6) {
 
-                    Toast.makeText(LoginActivity.this, "Password too short..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Password too short..", Toast.LENGTH_LONG).show();
 
                 }
                 firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -64,8 +64,10 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     startActivity(new Intent(getApplicationContext(), CommunityActivity.class));
+                                    Toast.makeText(LoginActivity.this, "logged in successful", Toast.LENGTH_SHORT).show();
+
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
